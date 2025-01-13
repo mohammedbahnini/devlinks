@@ -96,7 +96,7 @@ const SelectContent = React.forwardRef<
 
       <SelectPrimitive.Viewport
         className={cn(
-          "px-4",
+          "",
           position === "popper" &&
           "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]"
         )}
@@ -122,8 +122,7 @@ const SelectLabel = React.forwardRef<
 SelectLabel.displayName = SelectPrimitive.Label.displayName
 
 interface SelectItemProps extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item> {
-  Icon?: IconType,
-  MIcon?: React.ReactNode
+  Icon?: IconType
 }
 
 
@@ -131,26 +130,26 @@ interface SelectItemProps extends React.ComponentPropsWithoutRef<typeof SelectPr
 const SelectItem = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Item>,
   SelectItemProps
->(({ className, children, Icon, MIcon, ...props }, ref) => (
+>(({ className, children, Icon, ...props }, ref) => (
 
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex gap-3 w-full cursor-pointer select-none items-center rounded-sm py-3 body-m outline-none focus:bg-accent focus:text-accent-foreground data-[state='checked']:text-purple  data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&:not(:last-child)]:border-b [&:not(:last-child)]:border-b",
+      "relative px-3 flex gap-3 w-full cursor-pointer select-none items-center rounded-sm py-3 body-m outline-none focus:bg-accent focus:text-accent-foreground data-[state='checked']:text-purple  data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&:not(:last-child)]:border-b",
       className
     )}
     {...props}
   >
 
-    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center ">
+    <span className="absolute right-2 flex h-3.5 w-3.5 items-center justify-center ">
       <SelectPrimitive.ItemIndicator>
         <Check className="h-4 w-4" />
       </SelectPrimitive.ItemIndicator>
     </span>
 
     <SelectPrimitive.ItemText className="pl-5 flex gap-x-3" asChild={true}>
-      <div className="flex flex-1 gap-x-3">
-        <Icon />{MIcon} {children}
+      <div className="flex flex-1 gap-x-3 items-center">
+        {Icon && <Icon />}{children}
       </div>
     </SelectPrimitive.ItemText>
   </SelectPrimitive.Item>
