@@ -7,6 +7,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AtSign, AtSignIcon, Link } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from 'zod';
+import { avocado } from '@lucide/lab';
+import { LuGithub } from "react-icons/lu";
+import { FaGithubAlt } from "react-icons/fa";
 
 const formshcema = z.object({
   email: z.string().min(1, 'Enter an email').email('Email invalid')
@@ -58,19 +61,19 @@ export default function Home() {
       <br />
 
       <div className="px-10 py-10">
-        <Select>
+        <Select open={true} >
           <SelectTrigger className="">
             <SelectValue placeholder="Select a fruit" />
           </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="apple" className="bg-none">Apple</SelectItem>
-            <SelectItem value="banana">Banana</SelectItem>
+          <SelectContent className="divide-y divide-blue-800 ">
+            <SelectItem value="apple" Icon={LuGithub} MIcon={<FaGithubAlt />} >Apple</SelectItem>
+            {/* <SelectItem value="banana" >Banana</SelectItem>
             <SelectItem value="blueberry">Blueberry</SelectItem>
             <SelectItem value="grapes">Grapes</SelectItem>
-            <SelectItem value="pineapple">Pineapple</SelectItem>
+            <SelectItem value="pineapple">Pineapple</SelectItem> */}
           </SelectContent>
         </Select>
-      </div>
+      </div >
 
     </>
 

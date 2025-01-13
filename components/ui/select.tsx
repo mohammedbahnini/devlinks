@@ -2,9 +2,15 @@
 
 import * as React from "react"
 import * as SelectPrimitive from "@radix-ui/react-select"
-import { Check, ChevronDown, ChevronUp, Link } from "lucide-react"
+import { Check, ChevronDown, ChevronUp, Icon, IconNode, Link, Link2 } from "lucide-react"
+
 
 import { cn } from "@/lib/utils"
+import { DynamicIcon, IconName } from "lucide-react/dynamic"
+import { IconType } from 'react-icons';
+
+
+
 
 const Select = SelectPrimitive.Root
 
@@ -19,7 +25,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex w-full items-center gap-x-3 whitespace-nowrap rounded-lg border border-light-grey bg-transparent px-4 py-3 body-m  ring-offset-background placeholder:text-dark-grey focus:outline-none focus:border-purple disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+      "flex w-full items-center gap-x-3 whitespace-nowrap rounded-lg border border-light-grey bg-transparent px-4 py-3 body-m  ring-offset-background placeholder:text-dark-grey focus:outline-none hover:border-purple hover:focused focus:border-purple  focus:focused disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
       className
     )}
     {...props}
@@ -90,7 +96,7 @@ const SelectContent = React.forwardRef<
 
       <SelectPrimitive.Viewport
         className={cn(
-          "p-1",
+          "px-4",
           position === "popper" &&
           "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]"
         )}
@@ -115,24 +121,38 @@ const SelectLabel = React.forwardRef<
 ))
 SelectLabel.displayName = SelectPrimitive.Label.displayName
 
+interface SelectItemProps extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item> {
+  Icon?: IconType,
+  MIcon?: React.ReactNode
+}
+
+
+
 const SelectItem = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
->(({ className, children, ...props }, ref) => (
+  SelectItemProps
+>(({ className, children, Icon, MIcon, ...props }, ref) => (
+
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex gap-3 w-full cursor-pointer select-none items-center rounded-sm py-3 body-m outline-none focus:bg-accent focus:text-accent-foreground data-[state='checked']:text-purple  data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&:not(:last-child)]:border-b [&:not(:last-child)]:border-b",
       className
     )}
     {...props}
   >
-    <span className="absolute right-2 flex h-3.5 w-3.5 items-center justify-center ">
+
+    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center ">
       <SelectPrimitive.ItemIndicator>
         <Check className="h-4 w-4" />
       </SelectPrimitive.ItemIndicator>
     </span>
-    <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+
+    <SelectPrimitive.ItemText className="pl-5 flex gap-x-3" asChild={true}>
+      <div className="flex flex-1 gap-x-3">
+        <Icon />{MIcon} {children}
+      </div>
+    </SelectPrimitive.ItemText>
   </SelectPrimitive.Item>
 ))
 SelectItem.displayName = SelectPrimitive.Item.displayName
