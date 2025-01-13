@@ -13,7 +13,9 @@ import { TbBrandGithubFilled } from "react-icons/tb";
 import { AiFillYoutube } from "react-icons/ai";
 import { FaGithubAlt, FaLinkedin, FaLinkedinIn } from "react-icons/fa";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
+import { ChangeEvent, MouseEventHandler, useRef, useState } from "react";
+import { PiImage } from "react-icons/pi";
+import ImageUploader from "@/components/shared/image-uploader";
 
 const formshcema = z.object({
   email: z.string().min(1, 'Enter an email').email('Email invalid')
@@ -35,12 +37,21 @@ export default function Home() {
   }
 
 
-  const [file, setFile] = useState();
-  function handleChange(e) {
+  const [file, setFile] = useState('avatar.PNG');
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
     console.log(e.target.files);
-    setFile(URL.createObjectURL(e.target.files[0]));
+    if (e.target.files?.length) {
+      setFile(URL.createObjectURL(e.target.files[0]));
+    }
+
   }
 
+
+  const handleUploadClick = () => {
+    fileRef.current?.click();
+  }
   return (
     <>
       <Button variant={'default'} className="">Button</Button>
@@ -106,18 +117,15 @@ export default function Home() {
 
       <br />
 
-      <div className="px-20 py-5">
+      <div className="px-10 py-5">
 
         <h1>Image</h1>
 
 
+        <ImageUploader />
 
 
-        <div className="App">
-          <h2>Add Image:</h2>
-          <input type="file" onChange={handleChange} />
-          <img src={file} />
-        </div>
+
 
 
       </div>
