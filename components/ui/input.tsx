@@ -12,7 +12,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, icon, error, ...props }, ref,) => {
     const [isFocused, setIsFocused] = React.useState(false);
     return (
-      <div className={cn("flex items-center gap-x-3  border rounded-lg px-4 py-3 ",
+      <div className={cn("flex items-center gap-x-3  border rounded-lg px-4 py-3 bg-white ",
         isFocused && 'border-purple focused',
         !isFocused && 'border-border-color',
         error && 'border-red')}>

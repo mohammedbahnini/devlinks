@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${instrument.className} antialiased`} >
+      <body className={`${instrument.className} antialiased bg-light-grey`} >
         {children}
       </body>
     </html>

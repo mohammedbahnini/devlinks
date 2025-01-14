@@ -15,7 +15,7 @@ export default {
 			'light-purple' : '#EFEBFF',
 			'dark-grey' : '#333333',
 			'grey' : '#737373',
-			'light-grey' : '#D9D9D9',
+			'light-grey' : '#FAFAFA',
 			'border-color' : '#D9D9D9' ,
 			'red' : '#FF3939',
   			background: 'hsl(var(--background))',

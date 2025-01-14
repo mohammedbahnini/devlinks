@@ -75,7 +75,9 @@ body {
   .heading-m {
     @apply text-[2rem] leading-normal font-bold;
   }
-
+  .heading {
+    @apply text-2xl leading-normal font-bold;
+  }
   .heading-s {
     @apply text-base leading-normal font-bold;
   }

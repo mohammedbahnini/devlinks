@@ -18,19 +18,25 @@ const SelectGroup = SelectPrimitive.Group
 
 const SelectValue = SelectPrimitive.Value
 
+interface SelectTriggerProps extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> {
+  icon? : React.ReactNode
+}
+
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
+    SelectTriggerProps
+>(({ className, children, icon, ...props }, ref) => (
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex w-full items-center gap-x-3 whitespace-nowrap rounded-lg border border-light-grey bg-transparent px-4 py-3 body-m  ring-offset-background placeholder:text-dark-grey focus:outline-none hover:border-purple hover:focused focus:border-purple  focus:focused disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+      "flex w-full items-center gap-x-3 whitespace-nowrap rounded-lg border border-border-color bg-white px-4 py-3 body-m  ring-offset-background placeholder:text-dark-grey focus:outline-none hover:border-purple hover:focused focus:border-purple  focus:focused disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
       className
     )}
     {...props}
   >
-    <Link size={16} className="text-grey" strokeWidth={2} />
+    {icon && <Link size={16} className="text-grey" strokeWidth={2} />}
+
+
     <div className="flex-1 flex">
       {children}
     </div>
