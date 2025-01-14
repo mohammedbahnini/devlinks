@@ -1,5 +1,5 @@
 'use client';
-import {Form, FormField, FormItem, FormLabel} from "@/components/ui/form";
+import {Form, FormControl, FormField, FormItem, FormLabel} from "@/components/ui/form";
 import {useForm} from "react-hook-form";
 import {AddLinkFormDataType, AddLinkSchema} from "@/lib/schemas";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -10,6 +10,7 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/c
 import {TbBrandGithubFilled} from "react-icons/tb";
 import {AiFillYoutube} from "react-icons/ai";
 import {FaLinkedin} from "react-icons/fa";
+import {Link} from "lucide-react";
 
 export default function AddLinkForm(){
 
@@ -58,12 +59,15 @@ export default function AddLinkForm(){
                     render={ ({field , fieldState})=> (
                         <FormItem>
                             <FormLabel className={'text-grey'}>Link</FormLabel>
-                            <Input
-                                type={'text'}
-                                placeholder={'e.g. https://www.github.com/johnappleseed'}
-                                {...field}
-                                error={fieldState.error?.message}
-                            />
+                            <FormControl>
+                                <Input
+                                    type={'text'}
+                                    placeholder={'e.g. https://www.github.com/johnappleseed'}
+                                    {...field}
+                                    error={fieldState.error?.message}
+                                    icon={<Link size={16} />}
+                                />
+                            </FormControl>
                         </FormItem>
                     )}
                     />
