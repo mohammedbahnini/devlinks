@@ -16,7 +16,7 @@ export default {
 			'dark-grey' : '#333333',
 			'grey' : '#737373',
 			'light-grey' : '#D9D9D9',
-			'border-color' : '#FAFAFA' ,
+			'border-color' : '#D9D9D9' ,
 			'red' : '#FF3939',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

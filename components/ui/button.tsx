@@ -10,14 +10,14 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-purple text-white  hover:bg-purple-hover",
+          "bg-purple text-white bg-purple  hover:bg-purple-hover",
         outline:
           "border border-[1px] border-purple bg-white hover:bg-light-grey text-purple "
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
+        default: "h-auto px-4 py-3",
+        sm: "h-auto  rounded-md px-3 text-xs",
+        lg: "h-auto rounded-md px-8",
         icon: "h-9 w-9",
       },
     },
