@@ -11,22 +11,30 @@ import {TbBrandGithubFilled} from "react-icons/tb";
 import {AiFillYoutube} from "react-icons/ai";
 import {FaLinkedin} from "react-icons/fa";
 import {Link} from "lucide-react";
+import {PlatformType} from "@/components/shared/editor/tabs/links-tab/links-tab";
 
-export default function AddLinkForm(){
+type AddLinkFormProps = {
+    handleRemovePlatform : (index) => void;
+    platform : PlatformType
+}
+export default function AddLinkForm(props : AddLinkFormProps){
 
+    const { handleRemovePlatform , platform } = props;
 
     const form = useForm<AddLinkFormDataType>({
         resolver : zodResolver(AddLinkSchema),
     })
+
+
 
     return (
         <div className={'bg-light-grey p-5 rounded-xl flex flex-col gap-y-3 '}>
 
             <div className={'flex  justify-between items-center'}>
                 <div>
-                    <h1 className={'flex gap-x-2 items-center text-grey text-base font-bold'}><HiMenuAlt4 />Link #1</h1>
+                    <h1 className={'flex gap-x-2 items-center text-grey text-base font-bold'}><HiMenuAlt4 />Link #{platform.index}</h1>
                 </div>
-                <button className={'text-grey'}>Remove</button>
+                <button className={'text-grey'} onClick={(e) => handleRemovePlatform(platform.index)}>Remove</button>
             </div>
 
             <Form {...form}>

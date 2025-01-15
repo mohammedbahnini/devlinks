@@ -10,14 +10,16 @@ type EditorTabs = {
 export default function EditorTabs(props : EditorTabs) {
     const { currentTab} = props;
     return (
-        <section className={'flex-1 flex flex-col '}>
+        <section className={'flex-1 flex flex-col lg:flex-row '}>
 
-            <Container className={'bg-white rounded-xl m-4 p-6 flex-1 flex flex-col   '}>
+            {/*<Container className={'bg-white rounded-xl m-4 p-6 flex-1 flex flex-col md:p-10   '}>*/}
 
-                <TabContent currenTab={currentTab} value={'links'} content={<LinksTab/>}/>
-                <TabContent currenTab={currentTab} value={'profile'} content={<ProfileTab />}/>
+            {/*    <TabContent currenTab={currentTab} value={'links'} content={<LinksTab/>}/>*/}
+            {/*    <TabContent currenTab={currentTab} value={'profile'} content={<ProfileTab />}/>*/}
 
-            </Container>
+            {/*</Container>*/}
+
+            <TabContent currenTab={currentTab} value={'links'} content={<LinksTab/>}/>
 
         </section>
     )

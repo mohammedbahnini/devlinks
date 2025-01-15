@@ -14,7 +14,7 @@ export default function EditorPage() {
 
     return (
         <>
-            <div className={'flex flex-col min-h-screen '}>
+            <div className={'flex flex-col min-h-svh '}>
             <EditorHeader handleTabChange={handleTabChange} defaultTab={defaultTab}/>
             <EditorTabs currentTab={currentTab} />
             </div>

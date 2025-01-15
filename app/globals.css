@@ -79,7 +79,7 @@ body {
     @apply text-2xl leading-normal font-bold;
   }
   .heading-s {
-    @apply text-base leading-normal font-bold;
+    @apply text-base leading-normal font-semibold;
   }
 
   .body-m {

@@ -26,8 +26,12 @@ export default function EditorHeader(props : EditorHeaderProps) {
                     <div>
                         <Tabs defaultValue={defaultTab} className="" onValueChange={handleTabChange}>
                             <TabsList className={'gap-0'}>
-                                <TabsTrigger value="links" icon={LuLink}></TabsTrigger>
-                                <TabsTrigger value="profile" icon={FaRegUserCircle} ></TabsTrigger>
+                                <TabsTrigger value="links" icon={LuLink}>
+                                    <span className={'heading-s hidden invisible md:visible md:block'}>Links</span>
+                                </TabsTrigger>
+                                <TabsTrigger value="profile" icon={FaRegUserCircle}>
+                                    <span className={'heading-s hidden invisible md:visible md:block'}>Profile Details</span>
+                                </TabsTrigger>
                             </TabsList>
                         </Tabs>
 
