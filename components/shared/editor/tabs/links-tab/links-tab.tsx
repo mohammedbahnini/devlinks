@@ -1,7 +1,7 @@
 'use client';
 import {Button} from "@/components/ui/button";
 import AddLinkForm from "@/components/shared/editor/tabs/links-tab/add-link-form";
-import React, {MouseEventHandler} from "react";
+import React, {MouseEventHandler, useEffect, useRef} from "react";
 import PhoneMockup from "@/components/shared/editor/tabs/phone-mockup";
 import Container from "@/components/shared/container";
 import {ScrollArea} from "@/components/ui/scroll-area";
@@ -21,13 +21,29 @@ export default function LinksTab() {
         link : 'github'
     }]);
 
+    const scroller = useRef<HTMLSpanElement>(null);
+    const platformsView = useRef<HTMLDivElement>(null);
+
     // const [platforms , setPlatforms] = React.useState<PlatformType[]>([]);
 
 
-    const handleAddNewLinkCick =(e : React.MouseEventHandler<HTMLButtonElement>  ) =>{
-        setPlatforms((prev) => [...prev , {index : prev.length + 1, name : 'name'  , link : 'link'}])
-        console.log(platforms)
+    const handleAddNewLinkCick =async (e : React.MouseEventHandler<HTMLButtonElement>  ) =>{
+        await setPlatforms((prev) => [...prev , {index : prev.length + 1, name : 'name'  , link : 'link'}])
+
+        platformsView.current.scrollIntoView({ behavior: "smooth" , block: "end" });
+         console.log( platformsView.current.scrollTop);
+
+
     }
+
+    useEffect( ()=> {
+        console.log( platforms );
+        //platformsView.current.scrollIntoView({ behavior: "smooth" , block: "end" });
+    },[platforms]);
+
+
+
+
 
     const handleRemovePlatform = (index : number) => {
         const newPlatforms = platforms.filter(platform => platform.index !== index);
@@ -38,7 +54,7 @@ export default function LinksTab() {
     return (
         <Container className={'my-4 md:my-6 flex-1 flex md:gap-x-6 '}>
 
-            <div className={'hidden invisible lg:flex lg:visible bg-white rounded-xl md:w-5/12 p-6 justify-center '}>
+            <div className={'hidden invisible lg:flex lg:visible bg-white rounded-xl md:w-5/12 p-6 items-center justify-center '}>
                 <PhoneMockup />
             </div>
 
@@ -59,18 +75,20 @@ export default function LinksTab() {
 
                     {
                         platforms.length > 0 && (
-                            <ScrollArea className={'relative h-full  mt-6 w-full'} type={'always'}>
-                                <div className={'absolute top-0 bottom-0 '}>
-                                    <div className={'flex flex-col gap-6 pb-6'}>
+                            <ScrollArea className={'relative h-full  mt-6 w-full'} type={'hover'}  >
+                                <div className={'absolute inset-0'} >
+                                    <div className={'flex flex-col gap-6 pb-0 '}  ref={platformsView}>
                                     {
                                         platforms.map((platform) => (
                                             <AddLinkForm
                                                 key={platform.index}
                                                 platform={platform}
                                                 handleRemovePlatform={handleRemovePlatform}
+
                                             />
                                         ))
                                     }
+                                    <span ref={scroller}></span>
                                     </div>
                                 </div>
 
