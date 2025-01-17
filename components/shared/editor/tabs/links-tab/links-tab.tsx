@@ -1,24 +1,25 @@
 'use client';
-import {Button} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import AddLinkForm from "@/components/shared/editor/tabs/links-tab/add-link-form";
-import React, {MouseEventHandler, useEffect, useRef} from "react";
+import React, { MouseEventHandler, useEffect, useRef } from "react";
 import PhoneMockup from "@/components/shared/editor/tabs/phone-mockup";
 import Container from "@/components/shared/container";
-import {ScrollArea} from "@/components/ui/scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { cn } from "@/lib/utils";
 
 export type PlatformType = {
-    index : number ,
-    name : string ,
-    link : string
+    index: number,
+    name: string,
+    link: string
 }
 export default function LinksTab() {
 
     // i keep it simple for now but i must go with zustand or redux
 
-    const [platforms , setPlatforms] = React.useState<PlatformType[]>([{
-        index : 1 ,
-        name : 'github' ,
-        link : 'github'
+    const [platforms, setPlatforms] = React.useState<PlatformType[]>([{
+        index: 1,
+        name: 'github',
+        link: 'github'
     }]);
 
     const scroller = useRef<HTMLSpanElement>(null);
@@ -27,32 +28,32 @@ export default function LinksTab() {
     // const [platforms , setPlatforms] = React.useState<PlatformType[]>([]);
 
 
-    const handleAddNewLinkCick =async (e : React.MouseEventHandler<HTMLButtonElement>  ) =>{
-        await setPlatforms((prev) => [...prev , {index : prev.length + 1, name : 'name'  , link : 'link'}])
+    const handleAddNewLinkCick = async (e: React.MouseEventHandler<HTMLButtonElement>) => {
+        await setPlatforms((prev) => [...prev, { index: prev.length + 1, name: 'name', link: 'link' }])
 
-        platformsView.current.scrollIntoView({ behavior: "smooth" , block: "end" });
-         console.log( platformsView.current.scrollTop);
+        platformsView.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+        console.log(platformsView.current?.scrollTop);
 
 
     }
 
-    useEffect( ()=> {
-        console.log( platforms );
+    useEffect(() => {
+        console.log(platforms);
         //platformsView.current.scrollIntoView({ behavior: "smooth" , block: "end" });
-    },[platforms]);
+    }, [platforms]);
 
 
 
 
 
-    const handleRemovePlatform = (index : number) => {
+    const handleRemovePlatform = (index: number) => {
         const newPlatforms = platforms.filter(platform => platform.index !== index);
-        console.log( newPlatforms)
-        setPlatforms( (pres) => [...newPlatforms]);
+        console.log(newPlatforms)
+        setPlatforms((pres) => [...newPlatforms]);
     }
 
     return (
-        <Container className={'my-4 md:my-6 flex-1 flex md:gap-x-6 '}>
+        <Container className={'my-4 md:my-6 flex-1 flex md:gap-x-6'}>
 
             <div className={'hidden invisible lg:flex lg:visible bg-white rounded-xl md:w-5/12 p-6 items-center justify-center '}>
                 <PhoneMockup />
@@ -71,24 +72,24 @@ export default function LinksTab() {
                 <Button variant={'outline'} className={'w-full mt-10 '} onClick={handleAddNewLinkCick}>+ Add new
                     link</Button>
 
-                <div className={'flex-1 '} >
+                <div className={cn('flex-1 bg-white mt-6 mb-6  md:mb-10', platforms.length > 0 && 'md:mb-0')} >
 
                     {
                         platforms.length > 0 && (
-                            <ScrollArea className={'relative h-full  mt-6 w-full'} type={'hover'}  >
+                            <ScrollArea className={'relative h-full  mt-0 w-full'} type={'hover'}  >
                                 <div className={'absolute inset-0'} >
-                                    <div className={'flex flex-col gap-6 pb-0 '}  ref={platformsView}>
-                                    {
-                                        platforms.map((platform) => (
-                                            <AddLinkForm
-                                                key={platform.index}
-                                                platform={platform}
-                                                handleRemovePlatform={handleRemovePlatform}
+                                    <div className={'flex flex-col gap-6 pb-0 '} ref={platformsView}>
+                                        {
+                                            platforms.map((platform) => (
+                                                <AddLinkForm
+                                                    key={platform.index}
+                                                    platform={platform}
+                                                    handleRemovePlatform={handleRemovePlatform}
 
-                                            />
-                                        ))
-                                    }
-                                    <span ref={scroller}></span>
+                                                />
+                                            ))
+                                        }
+                                        {/* <span ref={scroller}></span> */}
                                     </div>
                                 </div>
 
@@ -99,13 +100,13 @@ export default function LinksTab() {
                     {
                         platforms.length == 0 && (
                             <div
-                                className={'bg-light-grey mt-6 flex flex-col items-center justify-center gap-y-6 flex-1 rounded-xl p-5 '}>
+                                className={'bg-light-grey mt-0 h-full mb-6 flex flex-col items-center justify-center gap-y-6  rounded-xl p-5 '}>
 
-                                <div className={'w-32'}>
-                                    <img src='/images/illustration-empty.svg' className={'mx-auto'}/>
+                                <div className={'w-32 md:w-64'}>
+                                    <img src='/images/illustration-empty.svg' className={'mx-auto'} />
                                 </div>
                                 <h1 className={'heading text-dark-grey'}>Let’s get you started</h1>
-                                <p className={'body-m text-grey'}>Use the “Add new link” button to get started. Once you
+                                <p className={'body-m text-grey text-center'}>Use the “Add new link” button to get started. Once you
                                     have more than one link, you can reorder and edit them. We’re here to help you share
                                     your profiles with everyone!</p>
                             </div>
@@ -115,8 +116,8 @@ export default function LinksTab() {
 
                 </div>
 
-                <div className={'-mx-2 border-t border-t-border-color pt-6 mt-6 md:flex md:justify-end md:mx-0 '}>
-                    <Button className={'w-full md:w-fit md:min-w-fit  '}>Save</Button>
+                <div className={'-mx-2 border-t border-t-border-color pt-0 mt-0 md:flex md:justify-end md:mx-0 '}>
+                    <Button className={cn('w-full md:w-fit md:min-w-fit mt-6  ')} disabled={platforms.length == 0} >Save</Button>
                 </div>
             </div>
         </Container>
