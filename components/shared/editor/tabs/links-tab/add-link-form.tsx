@@ -1,25 +1,23 @@
 'use client';
 import {Form, FormControl, FormField, FormItem, FormLabel} from "@/components/ui/form";
 import {useForm} from "react-hook-form";
-import {AddLinkFormDataType, AddLinkSchema} from "@/lib/schemas";
+import {AddLinkFormDataType, AddLinkSchema, PlatformSelectType} from "@/lib/schemas";
 import {zodResolver} from "@hookform/resolvers/zod";
 import React from "react";
 import {Input} from "@/components/ui/input";
 import {HiMenuAlt4} from "react-icons/hi";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
-import {TbBrandGithubFilled} from "react-icons/tb";
-import {AiFillYoutube} from "react-icons/ai";
-import {FaLinkedin} from "react-icons/fa";
 import {Link} from "lucide-react";
-import {PlatformType} from "@/components/shared/editor/tabs/links-tab/links-tab";
+import { PlatformsSelectInitial} from "@/lib/platforms";
 
 type AddLinkFormProps = {
     handleRemovePlatform : (index) => void;
-    platform : PlatformType
+    handleChangePlatform : (value : string) => void;
+    platform : PlatformSelectType;
 }
 export default function AddLinkForm(props : AddLinkFormProps){
 
-    const { handleRemovePlatform , platform } = props;
+    const { handleRemovePlatform ,handleChangePlatform, platform } = props;
 
     const form = useForm<AddLinkFormDataType>({
         resolver : zodResolver(AddLinkSchema),
@@ -38,23 +36,26 @@ export default function AddLinkForm(props : AddLinkFormProps){
             </div>
 
             <Form {...form}>
-                <form className={'flex flex-col gap-y-3'}>
+                <form className={'flex flex-col gap-y-3'} onSubmit={form.handleSubmit(()=>{})}>
 
                     <FormField
                         control={form.control}
-                        name='link'
+                        name='platform'
                         render={ ({field , fieldState})=> (
                             <FormItem>
                                 <FormLabel className={'text-grey'}>Platform</FormLabel>
-                                <Select  {...field} >
+                                <Select  {...field} onValueChange={(value)=>handleChangePlatform(value)} >
                                     <SelectTrigger className="">
                                         <SelectValue placeholder="Select a platform" />
                                     </SelectTrigger>
                                     <SelectContent className="">
-                                        <SelectItem value="item1" Icon={TbBrandGithubFilled}  >Item 1</SelectItem>
-                                        <SelectItem value="item2" Icon={AiFillYoutube}  >Item 1</SelectItem>
-                                        <SelectItem value="item3" Icon={FaLinkedin}  >Item 1</SelectItem>
+                                        {
+                                            PlatformsSelectInitial.map( item => (
+                                                <SelectItem value={item.value} Icon={item.icon} key={item.id}  >{item.name}</SelectItem>
+                                            ))
+                                        }
                                     </SelectContent>
+
                                 </Select>
                             </FormItem>
                         )}

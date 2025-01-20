@@ -12,15 +12,11 @@ export default function EditorTabs(props : EditorTabs) {
     return (
         <section className={'flex-1 flex flex-row'}>
 
-            {/*<Container className={'bg-white rounded-xl m-4 p-6 flex-1 flex flex-col md:p-10   '}>*/}
 
-            {/*    <TabContent currenTab={currentTab} value={'links'} content={<LinksTab/>}/>*/}
-            {/*    <TabContent currenTab={currentTab} value={'profile'} content={<ProfileTab />}/>*/}
-
-            {/*</Container>*/}
-
-            <TabContent currenTab={currentTab} value={'links'} content={<LinksTab/>}/>
-
+            <section className={'flex flex-1'}>
+                <TabContent currenTab={currentTab} value={'links'} content={<LinksTab/>}/>
+                <TabContent currenTab={currentTab} value={'profile'} content={<ProfileTab />}/>
+            </section>
         </section>
     )
 }

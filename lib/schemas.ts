@@ -1,4 +1,5 @@
 import z from 'zod'
+import {IconType} from "react-icons";
 
 export const LoginSchema = z.object({
     email : z.string().min(1,"Can't be empty").email('Invalid email') ,
@@ -24,7 +25,26 @@ export type LoginFormHeaderProps  = {
 }
 
 export const AddLinkSchema = z.object({
+    platform : z.string().min(1,"Can't be empty"),
     link : z.string().min(1,"Can't be empty")
 })
 
 export type AddLinkFormDataType = z.infer<typeof AddLinkSchema>;
+
+export type PlatformPhoneMockupType = {
+    id : string ;
+    name : string ;
+    color : string ;
+    textColor : string ;
+    arrowColor : string ;
+    withBorder : boolean ;
+}
+
+
+export type PlatformSelectType = {
+    id : string ;
+    name : string ;
+    icon : IconType;
+    value  : string ;
+}
+

@@ -6,41 +6,32 @@ import PhoneMockup from "@/components/shared/editor/tabs/phone-mockup";
 import Container from "@/components/shared/container";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
+import {PlatformType} from "@/lib/schemas";
+import {InitialPlatforms} from '@/lib/platforms'
 
-export type PlatformType = {
-    index: number,
-    name: string,
-    link: string
+type PlatformsToSaveType = {
+    index : number ;
+    name : string ;
 }
+
 export default function LinksTab() {
 
     // i keep it simple for now but i must go with zustand or redux
 
-    const [platforms, setPlatforms] = React.useState<PlatformType[]>([{
-        index: 1,
-        name: 'github',
-        link: 'github'
+    const [platforms, setPlatforms] = React.useState<PlatformsToSaveType[]>([{
+        index : 1 ,
+        name : 'github'
     }]);
 
-    const scroller = useRef<HTMLSpanElement>(null);
     const platformsView = useRef<HTMLDivElement>(null);
-
-    // const [platforms , setPlatforms] = React.useState<PlatformType[]>([]);
 
 
     const handleAddNewLinkCick = async (e: React.MouseEventHandler<HTMLButtonElement>) => {
-        await setPlatforms((prev) => [...prev, { index: prev.length + 1, name: 'name', link: 'link' }])
+        await setPlatforms((prev) => [...prev, { index: prev.length + 1, name: 'name' }])
 
         platformsView.current?.scrollIntoView({ behavior: "smooth", block: "end" });
-        console.log(platformsView.current?.scrollTop);
-
-
     }
 
-    useEffect(() => {
-        console.log(platforms);
-        //platformsView.current.scrollIntoView({ behavior: "smooth" , block: "end" });
-    }, [platforms]);
 
 
 
@@ -49,8 +40,15 @@ export default function LinksTab() {
     const handleRemovePlatform = (index: number) => {
         const newPlatforms = platforms.filter(platform => platform.index !== index);
         console.log(newPlatforms)
-        setPlatforms((pres) => [...newPlatforms]);
+        setPlatforms(() => [...newPlatforms]);
     }
+
+    const handleChangePlatform = (value : string ) => {
+        console.log( value )
+    }
+
+
+
 
     return (
         <Container className={'my-4 md:my-6 flex-1 flex md:gap-x-6'}>
@@ -85,7 +83,7 @@ export default function LinksTab() {
                                                     key={platform.index}
                                                     platform={platform}
                                                     handleRemovePlatform={handleRemovePlatform}
-
+                                                    handleChangePlatform={handleChangePlatform}
                                                 />
                                             ))
                                         }
