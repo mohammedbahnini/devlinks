@@ -7,6 +7,7 @@ export default {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+
   theme: {
   	extend: {
   		colors: {
@@ -18,6 +19,19 @@ export default {
 			'light-grey' : '#FAFAFA',
 			'border-color' : '#D9D9D9' ,
 			'red' : '#FF3939',
+			'github' : '#1A1A1A',
+			'frontend-mentor' : '#FFFFFF',
+			'twitter' : '#43B7E9' ,
+			'linkedin' : '#2D68FF' ,
+			'youtube' : '#EE3939' ,
+			'facebook' : '#2442AC' ,
+			'twitch' : '#EE3FC8',
+			'devto' : '#333333' ,
+			'codewars' : '#8A1A50',
+			'freecodecamp' : '#302267' ,
+			'gitlab' : '#EB4925' ,
+			'hashcode' : '#0330D1',
+			'stackoverflow' : '#EC7100',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -66,5 +80,20 @@ export default {
   		}
   	}
   },
+	safelist : [
+		'bg-github',
+		'bg-frontend-mentor',
+		'bg-twitter',
+		'bg-linkedin',
+		'bg-youtube',
+		'bg-facebook',
+		'bg-twitch',
+		'bg-devto',
+		'bg-codewars',
+		'bg-freecodecamp',
+		'bg-gitlab',
+		'bg-hashnode',
+		'bg-stackoverflow'
+	],
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;

@@ -31,13 +31,15 @@ export const AddLinkSchema = z.object({
 
 export type AddLinkFormDataType = z.infer<typeof AddLinkSchema>;
 
-export type PlatformPhoneMockupType = {
+export type BasePlatformType = {
     id : string ;
+    tag : string;
     name : string ;
-    color : string ;
+    bgColor : string ;
     textColor : string ;
     arrowColor : string ;
     withBorder : boolean ;
+    icon : IconType ;
 }
 
 

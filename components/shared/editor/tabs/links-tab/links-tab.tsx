@@ -6,8 +6,9 @@ import PhoneMockup from "@/components/shared/editor/tabs/phone-mockup";
 import Container from "@/components/shared/container";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import {PlatformType} from "@/lib/schemas";
+import {BasePlatformType, PlatformType} from "@/lib/schemas";
 import {InitialPlatforms} from '@/lib/platforms'
+import {GetPlatformByTag} from "@/lib/functions";
 
 type PlatformsToSaveType = {
     index : number ;
@@ -22,6 +23,9 @@ export default function LinksTab() {
         index : 1 ,
         name : 'github'
     }]);
+
+
+    const  [mockupPlatforms, setMockupPlatforms] = React.useState<BasePlatformType[]>([]);
 
     const platformsView = useRef<HTMLDivElement>(null);
 
@@ -44,7 +48,13 @@ export default function LinksTab() {
     }
 
     const handleChangePlatform = (value : string ) => {
-        console.log( value )
+
+
+        const platfotmToAdd = GetPlatformByTag(value);
+        console.log( platfotmToAdd )
+        if( platfotmToAdd)
+            setMockupPlatforms( (prevState) => [...prevState , platfotmToAdd] );
+
     }
 
 
@@ -54,7 +64,7 @@ export default function LinksTab() {
         <Container className={'my-4 md:my-6 flex-1 flex md:gap-x-6'}>
 
             <div className={'hidden invisible lg:flex lg:visible bg-white rounded-xl md:w-5/12 p-6 items-center justify-center '}>
-                <PhoneMockup />
+                <PhoneMockup plaforms={mockupPlatforms} />
             </div>
 
 
