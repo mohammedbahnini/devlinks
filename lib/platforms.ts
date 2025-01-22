@@ -21,7 +21,7 @@ export const BasePlatforms : BasePlatformType[] = [
         id : '1' ,
         tag : 'github',
         name : 'GitHub' ,
-        bgColor : 'bg-black' ,
+        bgColor : 'bg-github' ,
         textColor : 'text-white' ,
         arrowColor : 'text-white' ,
         withBorder : false ,
@@ -31,7 +31,7 @@ export const BasePlatforms : BasePlatformType[] = [
         id : '2' ,
         tag : 'frontend-mentor',
         name : 'Frontend Mentor' ,
-        bgColor : 'bg-white' ,
+        bgColor : 'bg-frontend-mentor' ,
         textColor : 'text-black' ,
         arrowColor : 'text-black' ,
         withBorder : true ,
@@ -42,8 +42,8 @@ export const BasePlatforms : BasePlatformType[] = [
         tag : 'twitter',
         name : 'Twitter' ,
         bgColor : 'bg-twitter' ,
-        textColor : 'text-black' ,
-        arrowColor : 'text-black' ,
+        textColor : 'text-white' ,
+        arrowColor : 'text-white' ,
         withBorder : false ,
         icon : FaTwitter
     },
@@ -131,7 +131,7 @@ export const BasePlatforms : BasePlatformType[] = [
         id : '12' ,
         tag : 'hashnode',
         name : 'Hashnode' ,
-        bgColor : 'bg-hashcode' ,
+        bgColor : 'bg-hashnode' ,
         textColor : 'text-white' ,
         arrowColor : 'text-white' ,
         withBorder : false ,
@@ -149,91 +149,99 @@ export const BasePlatforms : BasePlatformType[] = [
     }
 ];
 
-
-
-export const PlatformsSelectInitial : PlatformSelectType[] = [
-    {
-        id : '1' ,
-        name : 'GitHub' ,
-        value : 'github',
-        icon : TbBrandGithubFilled
-    } ,
-    {
-        id : '2' ,
-        name : 'Frontend Mentor' ,
-        value : 'frontend-mentor',
-        icon : SiFrontendmentor
-    } ,
-    {
-        id : '3' ,
-        name : 'Twitter' ,
-        value : 'twitter',
-        icon : FaTwitter
-    } ,
-    {
-        id : '4' ,
-        name : 'LinkedIn' ,
-        value : 'linkedin',
-        icon : FaLinkedin
-    },
-    {
-        id : '5' ,
-        name : 'YouTube' ,
-        value : 'youtube',
-        icon : FaYoutube
-    },
-    {
-        id : '6' ,
-        name : 'Facebook' ,
-        value : 'facebook',
-        icon : FaFacebook
-    },
-    {
-        id : '7' ,
-        name : 'Twitch' ,
-        value : 'twitch',
-        icon : FaTwitch
-    },
-    {
-        id : '8' ,
-        name : 'Dev.to' ,
-        value : 'dev.to',
-        icon : FaDev
-    },
-    {
-        id : '9' ,
-        name : 'Codeward' ,
-        value : 'codewars',
-        icon : SiCodewars
-    },
-    {
-        id : '10' ,
-        name : 'Codepen' ,
-        value : 'codepen',
-        icon : FaCodepen
-    },
-    {
-        id : '11' ,
-        name : 'freeCodeCamp' ,
-        value : 'freecodecamp',
-        icon : FaFreeCodeCamp
-    },
-    {
-        id : '12' ,
-        name : 'GitLab' ,
-        value : 'gitlab',
-        icon : FaGitlab
-    },
-    {
-        id : '13' ,
-        name : 'Hashnode' ,
-        value : 'hashnode',
-        icon : FaHashnode
-    },
-    {
-        id : '14' ,
-        name : 'Stack Overflow' ,
-        value : 'stackoverflow',
-        icon : FaStackOverflow
+export const PlatformsSelectInitial : PlatformSelectType[] = BasePlatforms.map( item => {
+    return {
+        id : item.id ,
+        name :    item.name ,
+        icon :  item.icon,
+        value : item.tag
     }
-]
+})
+
+
+// export const PlatformsSelectInitial : PlatformSelectType[] = [
+//     {
+//         id : '1' ,
+//         name : 'GitHub' ,
+//         value : 'github',
+//         icon : TbBrandGithubFilled
+//     } ,
+//     {
+//         id : '2' ,
+//         name : 'Frontend Mentor' ,
+//         value : 'frontend-mentor',
+//         icon : SiFrontendmentor
+//     } ,
+//     {
+//         id : '3' ,
+//         name : 'Twitter' ,
+//         value : 'twitter',
+//         icon : FaTwitter
+//     } ,
+//     {
+//         id : '4' ,
+//         name : 'LinkedIn' ,
+//         value : 'linkedin',
+//         icon : FaLinkedin
+//     },
+//     {
+//         id : '5' ,
+//         name : 'YouTube' ,
+//         value : 'youtube',
+//         icon : FaYoutube
+//     },
+//     {
+//         id : '6' ,
+//         name : 'Facebook' ,
+//         value : 'facebook',
+//         icon : FaFacebook
+//     },
+//     {
+//         id : '7' ,
+//         name : 'Twitch' ,
+//         value : 'twitch',
+//         icon : FaTwitch
+//     },
+//     {
+//         id : '8' ,
+//         name : 'Dev.to' ,
+//         value : 'dev.to',
+//         icon : FaDev
+//     },
+//     {
+//         id : '9' ,
+//         name : 'Codeward' ,
+//         value : 'codewars',
+//         icon : SiCodewars
+//     },
+//     {
+//         id : '10' ,
+//         name : 'Codepen' ,
+//         value : 'codepen',
+//         icon : FaCodepen
+//     },
+//     {
+//         id : '11' ,
+//         name : 'freeCodeCamp' ,
+//         value : 'freecodecamp',
+//         icon : FaFreeCodeCamp
+//     },
+//     {
+//         id : '12' ,
+//         name : 'GitLab' ,
+//         value : 'gitlab',
+//         icon : FaGitlab
+//     },
+//     {
+//         id : '13' ,
+//         name : 'Hashnode' ,
+//         value : 'hashnode',
+//         icon : FaHashnode
+//     },
+//     {
+//         id : '14' ,
+//         name : 'Stack Overflow' ,
+//         value : 'stackoverflow',
+//         icon : FaStackOverflow
+//     }
+// ]

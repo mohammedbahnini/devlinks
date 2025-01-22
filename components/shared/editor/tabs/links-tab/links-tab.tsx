@@ -13,16 +13,14 @@ import {GetPlatformByTag} from "@/lib/functions";
 type PlatformsToSaveType = {
     index : number ;
     name : string ;
+    value : string ;
 }
 
 export default function LinksTab() {
 
     // i keep it simple for now but i must go with zustand or redux
 
-    const [platforms, setPlatforms] = React.useState<PlatformsToSaveType[]>([{
-        index : 1 ,
-        name : 'github'
-    }]);
+    const [platformsValues, setPlatformsValues] = React.useState<string[] | null >(null);
 
 
     const  [mockupPlatforms, setMockupPlatforms] = React.useState<BasePlatformType[]>([]);
@@ -31,7 +29,8 @@ export default function LinksTab() {
 
 
     const handleAddNewLinkCick = async (e: React.MouseEventHandler<HTMLButtonElement>) => {
-        await setPlatforms((prev) => [...prev, { index: prev.length + 1, name: 'name' }])
+
+        await setPlatformsValues((prev) => prev ? [...prev,''] : ['']);
 
         platformsView.current?.scrollIntoView({ behavior: "smooth", block: "end" });
     }
@@ -41,19 +40,48 @@ export default function LinksTab() {
 
 
 
-    const handleRemovePlatform = (index: number) => {
-        const newPlatforms = platforms.filter(platform => platform.index !== index);
-        console.log(newPlatforms)
-        setPlatforms(() => [...newPlatforms]);
+    const handleRemovePlatform = (value :string ,index: number) => {
+        console.log(value,index);
+        const newPlatforms = platformsValues.filter((platformValue, i) => i !== index );
+        //console.log(newPlatforms)
+        setPlatformsValues(() => newPlatforms.length > 0 ?  [...newPlatforms] : null );
+
+
+        const newMockupPlatforms = mockupPlatforms.filter( (item , i) => item.tag !== value && i !== index);
+        setMockupPlatforms( () => [...newMockupPlatforms]);
+        
     }
 
-    const handleChangePlatform = (value : string ) => {
-
+    const handleChangePlatform = (value : string , index : number) => {
+        console.log( value , index );
 
         const platfotmToAdd = GetPlatformByTag(value);
-        console.log( platfotmToAdd )
-        if( platfotmToAdd)
-            setMockupPlatforms( (prevState) => [...prevState , platfotmToAdd] );
+
+        // check if the base platforms contains the selecvted value
+        if( platfotmToAdd) {
+
+            // check if the selected index exists to update the mockup platforms
+            if( mockupPlatforms[index] )
+            {
+                setMockupPlatforms( (prevState) => {
+                    return prevState.map( (item , prevStateIndex) => {
+                        if( prevStateIndex === index )
+                        {
+                            return {
+                                ...platfotmToAdd
+                            }
+                        }
+                        else
+                        {
+                            return  item;
+                        }
+                    })
+                })
+            }
+            else
+                setMockupPlatforms( (prevState) => [...prevState , platfotmToAdd] );
+        }
+
 
     }
 
@@ -80,24 +108,24 @@ export default function LinksTab() {
                 <Button variant={'outline'} className={'w-full mt-10 '} onClick={handleAddNewLinkCick}>+ Add new
                     link</Button>
 
-                <div className={cn('flex-1 bg-white mt-6 mb-6  md:mb-10', platforms.length > 0 && 'md:mb-0')} >
+                <div className={cn('flex-1 bg-white mt-6 mb-6  md:mb-10', platformsValues?.length && 'md:mb-0')} >
 
                     {
-                        platforms.length > 0 && (
-                            <ScrollArea className={'relative h-full  mt-0 w-full'} type={'hover'}  >
-                                <div className={'absolute inset-0'} >
+                        platformsValues?.length && platformsValues.length > 0 && (
+                            <ScrollArea className={'relative h-full  mt-0 w-full'} type={'hover'}>
+                                <div className={'absolute inset-0'}>
                                     <div className={'flex flex-col gap-6 pb-0 '} ref={platformsView}>
                                         {
-                                            platforms.map((platform) => (
+                                            platformsValues.map((platform, index) => (
                                                 <AddLinkForm
-                                                    key={platform.index}
-                                                    platform={platform}
+                                                    key={index}
+                                                    platformValue={platform}
                                                     handleRemovePlatform={handleRemovePlatform}
                                                     handleChangePlatform={handleChangePlatform}
+                                                    index={index}
                                                 />
                                             ))
                                         }
-                                        {/* <span ref={scroller}></span> */}
                                     </div>
                                 </div>
 
@@ -106,15 +134,16 @@ export default function LinksTab() {
                     }
 
                     {
-                        platforms.length == 0 && (
+                        !platformsValues?.length && (
                             <div
                                 className={'bg-light-grey mt-0 h-full mb-6 flex flex-col items-center justify-center gap-y-6  rounded-xl p-5 '}>
 
                                 <div className={'w-32 md:w-64'}>
-                                    <img src='/images/illustration-empty.svg' className={'mx-auto'} />
+                                    <img src='/images/illustration-empty.svg' className={'mx-auto'}/>
                                 </div>
                                 <h1 className={'heading text-dark-grey'}>Let’s get you started</h1>
-                                <p className={'body-m text-grey text-center'}>Use the “Add new link” button to get started. Once you
+                                <p className={'body-m text-grey text-center'}>Use the “Add new link” button to get started.
+                                    Once you
                                     have more than one link, you can reorder and edit them. We’re here to help you share
                                     your profiles with everyone!</p>
                             </div>
@@ -125,7 +154,7 @@ export default function LinksTab() {
                 </div>
 
                 <div className={'-mx-2 border-t border-t-border-color pt-0 mt-0 md:flex md:justify-end md:mx-0 '}>
-                    <Button className={cn('w-full md:w-fit md:min-w-fit mt-6  ')} disabled={platforms.length == 0} >Save</Button>
+                    <Button className={cn('w-full md:w-fit md:min-w-fit mt-6  ')} disabled={platformsValues?.length} >Save</Button>
                 </div>
             </div>
         </Container>

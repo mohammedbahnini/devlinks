@@ -11,17 +11,24 @@ import {Link} from "lucide-react";
 import { PlatformsSelectInitial} from "@/lib/platforms";
 
 type AddLinkFormProps = {
-    handleRemovePlatform : (index) => void;
-    handleChangePlatform : (value : string) => void;
-    platform : PlatformSelectType;
+    handleRemovePlatform : (value : string ,index :number ) => void;
+    handleChangePlatform : (value : string,index : number ) => void;
+    platformValue : string;
+    index: number ;
+
 }
 export default function AddLinkForm(props : AddLinkFormProps){
 
-    const { handleRemovePlatform ,handleChangePlatform, platform } = props;
-
+    const { handleRemovePlatform ,handleChangePlatform, platformValue , index } = props;
+    const [selectedValue , setSelectedValue] = React.useState(platformValue);
     const form = useForm<AddLinkFormDataType>({
         resolver : zodResolver(AddLinkSchema),
     })
+
+    const innerHandlePlatformChange = (value : string,index : number) => {
+        setSelectedValue(value);
+        handleRemovePlatform(value,index)
+    }
 
 
 
@@ -30,9 +37,10 @@ export default function AddLinkForm(props : AddLinkFormProps){
 
             <div className={'flex  justify-between items-center'}>
                 <div>
-                    <h1 className={'flex gap-x-2 items-center text-grey text-base font-bold'}><HiMenuAlt4 />Link #{platform.index}</h1>
+                    <h1 className={'flex gap-x-2 items-center text-grey text-base font-bold'}><HiMenuAlt4 />Link #{index + 1}</h1>
                 </div>
-                <button className={'text-grey'} onClick={(e) => handleRemovePlatform(platform.index)}>Remove</button>
+                <button className={'text-grey'}
+                        onClick={(e) =>innerHandlePlatformChange(platformValue,index) }>Remove</button>
             </div>
 
             <Form {...form}>
@@ -44,7 +52,7 @@ export default function AddLinkForm(props : AddLinkFormProps){
                         render={ ({field , fieldState})=> (
                             <FormItem>
                                 <FormLabel className={'text-grey'}>Platform</FormLabel>
-                                <Select  {...field} onValueChange={(value)=>handleChangePlatform(value)} >
+                                <Select  {...field} onValueChange={(value)=>handleChangePlatform(value,index)} >
                                     <SelectTrigger className="">
                                         <SelectValue placeholder="Select a platform" />
                                     </SelectTrigger>

@@ -30,7 +30,7 @@ export default {
 			'codewars' : '#8A1A50',
 			'freecodecamp' : '#302267' ,
 			'gitlab' : '#EB4925' ,
-			'hashcode' : '#0330D1',
+			'hashnode' : '#0330D1',
 			'stackoverflow' : '#EC7100',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

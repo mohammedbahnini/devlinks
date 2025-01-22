@@ -13,7 +13,7 @@ type Props = {
 export default function PhoneMockup(props : Props){
     const { plaforms } = props;
     const count = 5 - (plaforms?.length ? plaforms?.length : 0);
-    console.log(count);
+
     return (
         <div className='relative bg-youtube'>
             <div className='absolute w-full h-full bg-green-700/10 px-7 '>
