@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Instrument_Sans } from 'next/font/google';
+import { Toaster } from "@/components/ui/toaster"
 import "./globals.css";
 
 
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${instrument.className} antialiased bg-light-grey`} >
         {children}
+        <Toaster />
       </body>
     </html>
   );

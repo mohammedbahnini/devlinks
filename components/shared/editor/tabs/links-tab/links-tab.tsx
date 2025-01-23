@@ -9,6 +9,8 @@ import { cn } from "@/lib/utils";
 import {BasePlatformType, PlatformType} from "@/lib/schemas";
 import {InitialPlatforms} from '@/lib/platforms'
 import {GetPlatformByTag} from "@/lib/functions";
+import {useToast} from "@/hooks/use-toast";
+import {ToastAction} from "@/components/ui/toast";
 
 type PlatformsToSaveType = {
     index : number ;
@@ -17,6 +19,9 @@ type PlatformsToSaveType = {
 }
 
 export default function LinksTab() {
+
+    const { toast } = useToast()
+
 
     // i keep it simple for now but i must go with zustand or redux
 
@@ -29,10 +34,26 @@ export default function LinksTab() {
 
 
     const handleAddNewLinkCick = async (e: React.MouseEventHandler<HTMLButtonElement>) => {
+        console.log( platformsValues);
+        const el = platformsValues?.includes('')
+        console.log(el)
+        if( el )
+        {
 
-        await setPlatformsValues((prev) => prev ? [...prev,''] : ['']);
+            toast({
+                variant: "destructive",
+                title: "Error",
+                description: "Please fill all the platforms !",
+                action: <ToastAction altText="Try again">Try again</ToastAction>,
+            })
+        }
+        else {
+            await setPlatformsValues((prev) => prev ? [...prev,''] : ['']);
+            console.log( platformsValues);
+            platformsView.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+        }
 
-        platformsView.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+
     }
 
 
@@ -40,20 +61,32 @@ export default function LinksTab() {
 
 
 
-    const handleRemovePlatform = (value :string ,index: number) => {
+    const handleRemovePlatform = async (value :string ,index: number) => {
         console.log(value,index);
-        const newPlatforms = platformsValues.filter((platformValue, i) => i !== index );
-        //console.log(newPlatforms)
-        setPlatformsValues(() => newPlatforms.length > 0 ?  [...newPlatforms] : null );
+        console.log(platformsValues);
+        const newPlatforms = platformsValues?.filter( (item , i) => i === index);
+        console.log(newPlatforms);
 
+        await setPlatformsValues(() => {
+            return [...newPlatforms]
+        });
+        await new Promise( resolve => setTimeout(resolve, 2000));
+        console.log(platformsValues)
 
-        const newMockupPlatforms = mockupPlatforms.filter( (item , i) => item.tag !== value && i !== index);
+        const newMockupPlatforms = mockupPlatforms.filter( (item , i) =>  i === index);
         setMockupPlatforms( () => [...newMockupPlatforms]);
         
     }
 
-    const handleChangePlatform = (value : string , index : number) => {
+    const handleChangePlatform = async (value : string , index : number) => {
         console.log( value , index );
+
+        const newPlatformsValues = platformsValues.map( (platformValue, i) => {
+            if( i === index ) return value;
+            else return platformValue;
+        });
+
+        await setPlatformsValues( ()=> [...newPlatformsValues]);
 
         const platfotmToAdd = GetPlatformByTag(value);
 
@@ -99,6 +132,7 @@ export default function LinksTab() {
             <div className={'h-full flex-1 flex flex-col bg-white rounded-xl p-6 md:p-10'}>
 
                 <div className={'flex flex-col gap-2'}>
+                    <code>{platformsValues}</code>
                     <h1 className={'heading text-dark-grey '}>Customize your links</h1>
                     <p className={'body-m text-grey '}>Add/edit/remove links below and then share all your profiles with
                         the

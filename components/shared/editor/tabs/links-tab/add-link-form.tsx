@@ -21,14 +21,17 @@ export default function AddLinkForm(props : AddLinkFormProps){
 
     const { handleRemovePlatform ,handleChangePlatform, platformValue , index } = props;
     const [selectedValue , setSelectedValue] = React.useState(platformValue);
+
     const form = useForm<AddLinkFormDataType>({
         resolver : zodResolver(AddLinkSchema),
     })
 
-    const innerHandlePlatformChange = (value : string,index : number) => {
-        setSelectedValue(value);
+    const innerHandlePlatformChange = async (value : string,index : number) => {
+        await setSelectedValue(value);
         handleRemovePlatform(value,index)
     }
+
+    console.log(selectedValue);
 
 
 
@@ -52,7 +55,7 @@ export default function AddLinkForm(props : AddLinkFormProps){
                         render={ ({field , fieldState})=> (
                             <FormItem>
                                 <FormLabel className={'text-grey'}>Platform</FormLabel>
-                                <Select  {...field} onValueChange={(value)=>handleChangePlatform(value,index)} >
+                                <Select  {...field} onValueChange={(value)=>handleChangePlatform(value,index)} defaultValue={selectedValue} >
                                     <SelectTrigger className="">
                                         <SelectValue placeholder="Select a platform" />
                                     </SelectTrigger>
