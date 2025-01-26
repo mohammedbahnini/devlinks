@@ -19,12 +19,12 @@ const SelectGroup = SelectPrimitive.Group
 const SelectValue = SelectPrimitive.Value
 
 interface SelectTriggerProps extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> {
-  icon? : React.ReactNode
+  icon?: React.ReactNode
 }
 
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
-    SelectTriggerProps
+  SelectTriggerProps
 >(({ className, children, icon, ...props }, ref) => (
   <SelectPrimitive.Trigger
     ref={ref}
@@ -40,6 +40,7 @@ const SelectTrigger = React.forwardRef<
     <div className="flex-1 flex">
       {children}
     </div>
+
     <SelectPrimitive.Icon asChild>
       <ChevronDown className="h-4 w-4 opacity-50" />
     </SelectPrimitive.Icon>

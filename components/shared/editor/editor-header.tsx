@@ -19,7 +19,7 @@ export default function EditorHeader(props: EditorHeaderProps) {
 
     return (
         <header className="md:p-6 md:pb-0 ">
-            <Container className='bg-red py-4 px-6 flex justify-between items-center rounded-b-xl md:rounded-xl'>
+            <Container className='bg-white py-4 px-6 flex justify-between items-center rounded-b-xl md:rounded-xl'>
                 <div>
                     <img src='/images/logo-devlinks-small.svg' alt='DevLinks' className="md:hidden md:invisible" />
                     <img src='/images/logo-devlinks-large.svg' alt='DevLinks' className="hidden invisible md:block md:visible max-w-[146px]" />

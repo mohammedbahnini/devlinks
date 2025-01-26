@@ -15,9 +15,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className={cn("flex items-center gap-x-3  border rounded-lg px-4 py-3 bg-white ",
         isFocused && 'border-purple focused',
         !isFocused && 'border-border-color',
-        error && 'border-red')}>
+        error && 'border-red',
+        className)}>
         <div>
-            {icon}
+          {icon}
         </div>
         <input
           type={type}

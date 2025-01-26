@@ -2,11 +2,14 @@
 import React, { useRef, useState } from 'react';
 import { PiImage } from 'react-icons/pi';
 import { CgSpinnerTwo } from "react-icons/cg";
+import { ControllerRenderProps, FieldValues } from 'react-hook-form';
 
-interface Props { }
+interface Props {
+    children?: React.ReactNode;
+}
 
 function ImageUploader(props: Props) {
-    const { } = props
+    const { children } = props
 
     const [file, setFile] = useState(null);
     const [isUploading, setIsUploading] = useState(false);
@@ -39,7 +42,7 @@ function ImageUploader(props: Props) {
 
 
 
-        <div className="w-[193px] aspect-square rounded-xl relative overflow-hidden">
+        <div className="w-[193px] aspect-square rounded-xl relative overflow-hidden shrink-0">
             <div className='hidden invisible'>
                 <input type="file" hidden ref={fileRef} onChange={handleChange} accept='image/*' />
             </div>
