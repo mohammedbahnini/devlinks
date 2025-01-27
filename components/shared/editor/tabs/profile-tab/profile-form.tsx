@@ -44,7 +44,7 @@ export default function ProfileForm() {
                             name='first-name'
                             render={({ field }) => (
                                 <FormItem className="md:flex md:items-center md:gap-x-4  ">
-                                    <div className="md:w-60 lg:w-28 xl:w-60  lg:w-40">
+                                    <div className="md:w-60 lg:w-28 xl:w-60 ">
                                         <FormLabel className="body-s text-grey mb-1 ">First name*</FormLabel>
                                     </div>
 

@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { BasePlatformType } from '@/lib/schemas';
 import { GetPlatformByTag } from '../functions';
+import { BasePlatforms } from '../platforms';
 
 type StoreType = {
     platformsValues: string[];
@@ -18,9 +19,9 @@ type StoreType = {
 export const Store = create<StoreType>()(
     (set, get) => ({
         platformsValues: [],
-        mockupPlatforms: [],
+        mockupPlatforms: [BasePlatforms[0], BasePlatforms[1], BasePlatforms[2], BasePlatforms[3], BasePlatforms[4], BasePlatforms[5]],
         currentTab: 'profile',
-        mode: 'editor',
+        mode: 'preview',
         changeTab: (value) => {
             set((state) => ({ currentTab: value }))
         },
@@ -87,7 +88,7 @@ export const Store = create<StoreType>()(
             })
         },
         changeMode: (value) => {
-            set((state) => {
+            set(() => {
                 return { mode: value }
             })
         }

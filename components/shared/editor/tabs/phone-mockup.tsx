@@ -1,4 +1,3 @@
-import AddLinkForm from "@/components/shared/editor/tabs/links-tab/add-link-form";
 import React from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
@@ -7,7 +6,7 @@ import { Store } from "@/lib/store/store";
 
 
 
-export default function PhoneMockup(props: Props) {
+export default function PhoneMockup() {
 
     const mockupPlatforms = Store(state => state.mockupPlatforms);
     const currentTab = Store(state => state.currentTab);
@@ -46,10 +45,12 @@ export default function PhoneMockup(props: Props) {
                             </div>
                         </ScrollArea>
                     </div>
+
+
                 </div>
 
             </div>
-            <img src='/images/illustration-phone-mockup.svg' />
+            <img src='/images/illustration-phone-mockup.svg' alt="Phone" />
         </div>
     )
 }
