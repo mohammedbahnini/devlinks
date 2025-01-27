@@ -1,7 +1,6 @@
 import AddLinkForm from "@/components/shared/editor/tabs/links-tab/add-link-form";
 import React from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { BasePlatformType, PlatformPhoneMockupType } from "@/lib/schemas";
 import { cn } from "@/lib/utils";
 import { MdArrowForward } from "react-icons/md";
 import { Store } from "@/lib/store/store";
