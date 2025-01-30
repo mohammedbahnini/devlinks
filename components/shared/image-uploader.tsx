@@ -1,32 +1,36 @@
 'use client';
-import React, { useRef, useState } from 'react';
+import React, { ChangeEvent, useRef, useState } from 'react';
 import { PiImage } from 'react-icons/pi';
 import { CgSpinnerTwo } from "react-icons/cg";
 import { ControllerRenderProps, FieldValues } from 'react-hook-form';
+import { Store } from '@/lib/store/store';
 
 interface Props {
     children?: React.ReactNode;
 }
 
 function ImageUploader(props: Props) {
-    const { children } = props
+    const { children } = props;
 
-    const [file, setFile] = useState(null);
+    const [file, setFile] = useState<string | null>(null);
     const [isUploading, setIsUploading] = useState(false);
     const fileRef = useRef<HTMLInputElement>(null);
+
+    const { avatarPath, setAvatarPath } = Store(state => state);
 
     async function handleChange(e: ChangeEvent<HTMLInputElement>) {
 
         setIsUploading(true);
         // add image to the server 
 
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 1000));
 
         setIsUploading(false);
 
         console.log(e.target.files);
         if (e.target.files?.length) {
             setFile(URL.createObjectURL(e.target.files[0]));
+            setAvatarPath(URL.createObjectURL(e.target.files[0]));
         }
 
     }

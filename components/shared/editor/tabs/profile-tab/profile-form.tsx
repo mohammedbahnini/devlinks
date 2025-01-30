@@ -1,6 +1,7 @@
 import ImageUploader from "@/components/shared/image-uploader";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Store } from "@/lib/store/store";
 import { useForm } from "react-hook-form"
 
 
@@ -9,6 +10,8 @@ import { useForm } from "react-hook-form"
 export default function ProfileForm() {
 
     const form = useForm();
+    const { firstName, lastName, email, setFirstName, setLastName, setEmail } = Store(state => state);
+
 
 
     return (
@@ -42,14 +45,14 @@ export default function ProfileForm() {
                         <FormField
                             control={form.control}
                             name='first-name'
-                            render={({ field }) => (
+                            render={() => (
                                 <FormItem className="md:flex md:items-center md:gap-x-4  ">
                                     <div className="md:w-60 lg:w-28 xl:w-60 ">
                                         <FormLabel className="body-s text-grey mb-1 ">First name*</FormLabel>
                                     </div>
 
                                     <FormControl>
-                                        <Input type="text" {...field} placeholder="Ben" className="md:flex-1" />
+                                        <Input type="text" placeholder="Ben" className="md:flex-1" value={firstName} onChange={e => setFirstName(e.target.value)} />
                                     </FormControl>
                                 </FormItem>
                             )}
@@ -58,13 +61,13 @@ export default function ProfileForm() {
                         <FormField
                             control={form.control}
                             name='last-name'
-                            render={({ field }) => (
+                            render={() => (
                                 <FormItem className="md:flex md:items-center md:gap-x-4  ">
                                     <div className="md:w-60 lg:w-28 xl:w-60 ">
                                         <FormLabel className="body-s text-grey mb-1">Last name*</FormLabel>
                                     </div>
                                     <FormControl>
-                                        <Input type="text" {...field} placeholder="Wright" className="md:flex-1" />
+                                        <Input type="text" value={lastName} onChange={e => setLastName(e.target.value)} placeholder="Wright" className="md:flex-1" />
                                     </FormControl>
                                 </FormItem>
                             )}
@@ -73,13 +76,13 @@ export default function ProfileForm() {
                         <FormField
                             control={form.control}
                             name='email'
-                            render={({ field }) => (
+                            render={() => (
                                 <FormItem className="md:flex md:items-center md:gap-x-4  ">
                                     <div className="md:w-60 lg:w-28 xl:w-60 ">
                                         <FormLabel className="body-s text-grey mb-1">Email</FormLabel>
                                     </div>
                                     <FormControl>
-                                        <Input type="text" {...field} placeholder="ben@example.com" className="md:flex-1" />
+                                        <Input type="text" value={email} onChange={e => setEmail(e.target.value)} placeholder="ben@example.com" className="md:flex-1" />
                                     </FormControl>
                                 </FormItem>
                             )}

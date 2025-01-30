@@ -9,17 +9,34 @@ import { Store } from "@/lib/store/store";
 export default function PhoneMockup() {
 
     const mockupPlatforms = Store(state => state.mockupPlatforms);
+    const { firstName, lastName, email, avatarPath } = Store(state => state);
     const currentTab = Store(state => state.currentTab);
     const count = 5 - (mockupPlatforms.length ? mockupPlatforms.length : 0);
-
 
     return (
         <div className='relative'>
             <div className='absolute w-full h-full px-7 '>
                 <div className='absolute top-[59px] bottom-[48px] left-[34px] right-[34px] bg-white flex flex-col items-center  '>
-                    <div className='rounded-full bg-mockup-fill w-24 aspect-square mb-6 '></div>
-                    <div className='bg-mockup-fill h-4 w-full max-w-[160px] rounded-full mb-[13px]'></div>
-                    <div className='bg-mockup-fill h-2 w-full rounded-full max-w-20'></div>
+
+
+                    {avatarPath ?
+                        (
+                            <div className='border-4 border-purple w-28 aspect-square rounded-full overflow-hidden mb-6'>
+                                <img src={avatarPath} className='w-full h-full object-cover' alt='avatar' />
+                            </div>
+
+                        ) :
+                        (
+                            <div className='rounded-full bg-mockup-fill w-24 aspect-square mb-6 '></div>
+                        )
+                    }
+
+
+                    {(firstName || lastName) && <h1 className='heading-m mt-0 text-dark-grey '>{firstName} {lastName}</h1>}
+                    {!firstName && !lastName && <div className='bg-mockup-fill h-4 w-full max-w-[160px] rounded-full mb-[13px]'></div>}
+
+                    {email && <h2 className='body-m text-grey mt-2'>{email}</h2>}
+                    {!email && <div className='bg-mockup-fill h-2 w-full rounded-full max-w-20'></div>}
 
                     <div className='flex-1 h-52 w-full mt-14'>
                         <ScrollArea className={'relative h-full w-full '}>
