@@ -38,7 +38,7 @@ export const Store = create<StoreType>()(
         platformsValues: [init[0].tag, init[1].tag, init[2].tag],
         mockupPlatforms: [...init],
         currentTab: 'profile',
-        mode: 'editor',
+        mode: 'preview',
         avatarPath: 'https://xsgames.co/randomusers/avatar.php?g=male',
         firstName: 'Ben',
         lastName: 'Wright',
