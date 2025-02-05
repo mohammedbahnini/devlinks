@@ -1,8 +1,9 @@
-import { create } from 'zustand';
+import { create, createStore } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { BasePlatformType } from '@/lib/schemas';
 import { GetPlatformByTag } from '../functions';
 import { BasePlatforms } from '../platforms';
+import { GetPlatforms } from '@/app/actions/get-platforms';
 
 type StoreType = {
     platformsValues: string[];
@@ -13,6 +14,7 @@ type StoreType = {
     firstName: string;
     lastName: string;
     email: string;
+    fakedata: any,
     getUserData: () => Promise<void>;
     changeTab: (value: string) => void;
     addEmptyPlatformValue: () => void,
@@ -27,22 +29,24 @@ type StoreType = {
 
 
 const mockGetData = async (): Promise<BasePlatformType[]> => {
-    await new Promise(resolve => setTimeout(resolve, 1000));
+
     return [BasePlatforms[0], BasePlatforms[1], BasePlatforms[2]];
 }
 const init = await mockGetData();
 
+//https://xsgames.co/randomusers/avatar.php?g=male
 
 export const Store = create<StoreType>()(
     (set, get) => ({
         platformsValues: [init[0].tag, init[1].tag, init[2].tag],
         mockupPlatforms: [...init],
         currentTab: 'profile',
-        mode: 'preview',
-        avatarPath: 'https://xsgames.co/randomusers/avatar.php?g=male',
+        mode: 'editor',
+        avatarPath: '',
         firstName: 'Ben',
         lastName: 'Wright',
         email: 'jhondoe@example.com',
+        fakedata: null,
         getUserData: async () => {
             set(() => ({ mockupPlatforms: [BasePlatforms[0], BasePlatforms[1], BasePlatforms[2]] }))
         },
@@ -129,3 +133,23 @@ export const Store = create<StoreType>()(
     }),
 
 );
+
+
+type FakeStoreType = {
+    init: any,
+    foo: string
+}
+
+export function createFakeStore(initProps: any) {
+
+    return createStore<FakeStoreType>()
+        (
+            (set) => ({
+                init: initProps,
+                foo: 'bar'
+            })
+        )
+}
+
+export type FakeStore = ReturnType<typeof createFakeStore>
+

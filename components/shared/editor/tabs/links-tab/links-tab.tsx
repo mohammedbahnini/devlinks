@@ -27,8 +27,7 @@ export default function LinksTab() {
     const addEmptyPlatformValue = Store(state => state.addEmptyPlatformValue);
     const removePlatform = Store(state => state.removePlatform);
     const updatePlatform = Store(store => store.updatePlatform);
-
-
+    const f = Store(s => s.fakedata);
 
 
     const handleAddNewLinkCick = async (e: React.MouseEventHandler<HTMLButtonElement>) => {
