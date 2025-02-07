@@ -1,5 +1,6 @@
 import z from 'zod'
 import { IconType } from "react-icons";
+import React from 'react';
 
 export const LoginSchema = z.object({
     email: z.string().min(1, "Can't be empty").email('Invalid email'),
@@ -39,14 +40,15 @@ export type BasePlatformType = {
     textColor: string;
     arrowColor: string;
     withBorder: boolean;
-    icon: IconType;
+    icon: string;
 }
 
 
 export type PlatformSelectType = {
     id: string;
+    tag: string;
     name: string;
-    icon: IconType;
-    value: string;
+    icon: string;
+
 }
 

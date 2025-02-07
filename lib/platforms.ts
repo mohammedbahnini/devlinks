@@ -14,6 +14,7 @@ import { SiCodewars, SiFrontendmentor } from "react-icons/si";
 import { TbBrandGithubFilled } from "react-icons/tb";
 import { TiSocialTwitter } from "react-icons/ti";
 import { FaHashnode } from "react-icons/fa6";
+import { PlatformIcon } from '@/components/shared/editor/platform-icon';
 
 export const BasePlatforms: BasePlatformType[] = [
     {
@@ -24,7 +25,7 @@ export const BasePlatforms: BasePlatformType[] = [
         textColor: 'text-white',
         arrowColor: 'text-white',
         withBorder: false,
-        icon: TbBrandGithubFilled
+        icon: 'TbBrandGithubFilled'
     },
     {
         id: '2',
@@ -34,7 +35,7 @@ export const BasePlatforms: BasePlatformType[] = [
         textColor: 'text-black',
         arrowColor: 'text-black',
         withBorder: true,
-        icon: SiFrontendmentor
+        icon: 'SiFrontendmentor'
     },
     {
         id: '3',
@@ -44,7 +45,7 @@ export const BasePlatforms: BasePlatformType[] = [
         textColor: 'text-white',
         arrowColor: 'text-white',
         withBorder: false,
-        icon: FaTwitter
+        icon: 'FaTwitter'
     },
     {
         id: '4',
@@ -54,7 +55,7 @@ export const BasePlatforms: BasePlatformType[] = [
         textColor: 'text-white',
         arrowColor: 'text-white',
         withBorder: false,
-        icon: FaLinkedin
+        icon: 'FaLinkedin'
     },
     {
         id: '5',
@@ -64,7 +65,7 @@ export const BasePlatforms: BasePlatformType[] = [
         textColor: 'text-white',
         arrowColor: 'text-white',
         withBorder: false,
-        icon: FaYoutube
+        icon: 'FaYoutube'
     },
     {
         id: '6',
@@ -74,7 +75,7 @@ export const BasePlatforms: BasePlatformType[] = [
         textColor: 'text-white',
         arrowColor: 'text-white',
         withBorder: false,
-        icon: FaFacebook
+        icon: 'FaFacebook'
     },
     {
         id: '7',
@@ -84,7 +85,7 @@ export const BasePlatforms: BasePlatformType[] = [
         textColor: 'text-white',
         arrowColor: 'text-white',
         withBorder: false,
-        icon: FaTwitch
+        icon: 'FaTwitch'
     },
     {
         id: '8',
@@ -94,7 +95,7 @@ export const BasePlatforms: BasePlatformType[] = [
         textColor: 'text-white',
         arrowColor: 'text-white',
         withBorder: false,
-        icon: FaDev
+        icon: 'FaDev'
     },
     {
         id: '9',
@@ -104,7 +105,7 @@ export const BasePlatforms: BasePlatformType[] = [
         textColor: 'text-white',
         arrowColor: 'text-white',
         withBorder: false,
-        icon: SiCodewars
+        icon: 'SiCodewars'
     },
     {
         id: '10',
@@ -114,7 +115,7 @@ export const BasePlatforms: BasePlatformType[] = [
         textColor: 'text-white',
         arrowColor: 'text-white',
         withBorder: false,
-        icon: FaCodepen
+        icon: 'FaCodepen'
     },
     {
         id: '11',
@@ -124,7 +125,7 @@ export const BasePlatforms: BasePlatformType[] = [
         textColor: 'text-white',
         arrowColor: 'text-white',
         withBorder: false,
-        icon: FaGitlab
+        icon: 'FaGitlab'
     },
     {
         id: '12',
@@ -134,7 +135,7 @@ export const BasePlatforms: BasePlatformType[] = [
         textColor: 'text-white',
         arrowColor: 'text-white',
         withBorder: false,
-        icon: FaHashnode
+        icon: 'FaHashnode'
     },
     {
         id: '13',
@@ -144,7 +145,7 @@ export const BasePlatforms: BasePlatformType[] = [
         textColor: 'text-white',
         arrowColor: 'text-white',
         withBorder: false,
-        icon: FaStackOverflow
+        icon: 'FaStackOverflow'
     }
 ];
 
@@ -157,90 +158,3 @@ export const PlatformsSelectInitial: PlatformSelectType[] = BasePlatforms.map(it
     }
 })
 
-
-// export const PlatformsSelectInitial : PlatformSelectType[] = [
-//     {
-//         id : '1' ,
-//         name : 'GitHub' ,
-//         value : 'github',
-//         icon : TbBrandGithubFilled
-//     } ,
-//     {
-//         id : '2' ,
-//         name : 'Frontend Mentor' ,
-//         value : 'frontend-mentor',
-//         icon : SiFrontendmentor
-//     } ,
-//     {
-//         id : '3' ,
-//         name : 'Twitter' ,
-//         value : 'twitter',
-//         icon : FaTwitter
-//     } ,
-//     {
-//         id : '4' ,
-//         name : 'LinkedIn' ,
-//         value : 'linkedin',
-//         icon : FaLinkedin
-//     },
-//     {
-//         id : '5' ,
-//         name : 'YouTube' ,
-//         value : 'youtube',
-//         icon : FaYoutube
-//     },
-//     {
-//         id : '6' ,
-//         name : 'Facebook' ,
-//         value : 'facebook',
-//         icon : FaFacebook
-//     },
-//     {
-//         id : '7' ,
-//         name : 'Twitch' ,
-//         value : 'twitch',
-//         icon : FaTwitch
-//     },
-//     {
-//         id : '8' ,
-//         name : 'Dev.to' ,
-//         value : 'dev.to',
-//         icon : FaDev
-//     },
-//     {
-//         id : '9' ,
-//         name : 'Codeward' ,
-//         value : 'codewars',
-//         icon : SiCodewars
-//     },
-//     {
-//         id : '10' ,
-//         name : 'Codepen' ,
-//         value : 'codepen',
-//         icon : FaCodepen
-//     },
-//     {
-//         id : '11' ,
-//         name : 'freeCodeCamp' ,
-//         value : 'freecodecamp',
-//         icon : FaFreeCodeCamp
-//     },
-//     {
-//         id : '12' ,
-//         name : 'GitLab' ,
-//         value : 'gitlab',
-//         icon : FaGitlab
-//     },
-//     {
-//         id : '13' ,
-//         name : 'Hashnode' ,
-//         value : 'hashnode',
-//         icon : FaHashnode
-//     },
-//     {
-//         id : '14' ,
-//         name : 'Stack Overflow' ,
-//         value : 'stackoverflow',
-//         icon : FaStackOverflow
-//     }
-// ]

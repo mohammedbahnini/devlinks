@@ -129,7 +129,7 @@ const SelectLabel = React.forwardRef<
 SelectLabel.displayName = SelectPrimitive.Label.displayName
 
 interface SelectItemProps extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item> {
-  Icon?: IconType
+  Icon?: React.JSX.Element
 }
 
 
@@ -156,7 +156,7 @@ const SelectItem = React.forwardRef<
 
     <SelectPrimitive.ItemText className="pl-5 flex gap-x-3" asChild={true}>
       <div className="flex flex-1 gap-x-3 items-center">
-        {Icon && <Icon />}{children}
+        {Icon} {children}
       </div>
     </SelectPrimitive.ItemText>
   </SelectPrimitive.Item>

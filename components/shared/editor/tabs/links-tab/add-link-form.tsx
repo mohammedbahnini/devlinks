@@ -3,12 +3,13 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/
 import { useForm } from "react-hook-form";
 import { AddLinkFormDataType, AddLinkSchema, PlatformSelectType } from "@/lib/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useContext } from "react";
 import { Input } from "@/components/ui/input";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Link } from "lucide-react";
-import { PlatformsSelectInitial } from "@/lib/platforms";
+import { PlatformIcon } from "../../platform-icon";
+import { StaticDataContext } from "../../editor-page-provider";
 
 type AddLinkFormProps = {
     handleRemovePlatform: (value: string, index: number) => void;
@@ -18,6 +19,9 @@ type AddLinkFormProps = {
 
 }
 export default function AddLinkForm(props: AddLinkFormProps) {
+
+    const PlatformsSelectInitial = useContext(StaticDataContext);
+
 
     const { handleRemovePlatform, handleChangePlatform, platformValue, index } = props;
     const [selectedValue, setSelectedValue] = React.useState(platformValue);
@@ -35,10 +39,6 @@ export default function AddLinkForm(props: AddLinkFormProps) {
         await setSelectedValue(value);
         handleRemovePlatform(value, index)
     }
-
-    console.log('platformValue', platformValue);
-
-
 
     return (
         <div className={'bg-light-grey p-5 rounded-xl flex flex-col gap-y-3 '}>
@@ -66,9 +66,12 @@ export default function AddLinkForm(props: AddLinkFormProps) {
                                     </SelectTrigger>
                                     <SelectContent className="">
                                         {
-                                            PlatformsSelectInitial.map(item => (
-                                                <SelectItem value={item.value} Icon={item.icon} key={item.id}  >{item.name}</SelectItem>
+                                            PlatformsSelectInitial?.length > 0 ? PlatformsSelectInitial.map(item => (
+
+                                                <SelectItem value={item.tag} Icon={<PlatformIcon name={item.icon} />} key={item.id}  >{item.name}</SelectItem>
                                             ))
+                                                :
+                                                ''
                                         }
                                     </SelectContent>
 

@@ -72,14 +72,13 @@ model Verification {
 }
 
 model Platform {
-    id          String  @id @default(uuid())
-    tag         String
-    displayName String
-    bgColor     String
-    textColor   String
-    arrowColor  String
-    withBorder  Boolean
-    icon        String
-    users       User[]
-    userId      String?
+    id         String  @id @default(uuid())
+    tag        String
+    name       String
+    bgColor    String
+    textColor  String
+    arrowColor String
+    withBorder Boolean
+    icon       String
+    users      User[]
 }
