@@ -4,12 +4,15 @@ import LoginFormHeader from "@/components/shared/login/login-form-header";
 import LoginForm from "@/components/shared/login/login-form";
 
 
-const LoginPage =  ()=>{
+
+const LoginPage = () => {
+
+
 
     return (
         <div className='flex flex-col gap-y-16 pt-8 sm:items-center sm:justify-center min-h-screen  '>
 
-          <LoginHeader />
+            <LoginHeader />
 
             <section>
 
@@ -18,6 +21,7 @@ const LoginPage =  ()=>{
                     <LoginFormHeader
                         headerText={'Login'}
                         subHeaderText={'Add your details below to get back into the app'} />
+
                     <LoginForm />
 
                 </div>

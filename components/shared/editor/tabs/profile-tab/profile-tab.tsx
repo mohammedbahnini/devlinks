@@ -18,7 +18,7 @@ export default function ProfileTab() {
             </div>
 
             <div className={'h-full flex-1 flex flex-col bg-white rounded-xl p-6 md:p-10'}>
-                <Button onClick={e => AddPlatformToDB()} type="submit">Add Platform</Button>
+                {/* <Button onClick={e => AddPlatformToDB()} type="submit">Add Platform</Button> */}
                 <div className={'flex flex-col gap-2'}>
                     <h1 className={'heading text-dark-grey '}>Profile details</h1>
                     <p className={'body-m text-grey '}>Add you details to create a personnal touch to your profile</p>
