@@ -3,7 +3,6 @@
 import EditorTabs from "@/components/shared/editor/editor-tabs";
 import EditorHeader from "@/components/shared/editor/header/editor-header";
 import PreviewContent from "@/components/shared/editor/preview-content";
-import { Store } from "@/lib/store/store";
 import { useContext } from "react";
 import { MainStoreContext } from "./editor-page-provider";
 import { useStore } from "zustand";

@@ -41,7 +41,7 @@ export default function LoginForm() {
                     setIsSuccess(true);
                     setMessageIsVisible(true);
                     setMessage("You are logged in !");
-                    redirect("/dashboard");
+                    redirect("/editor");
                 },
             },
         );

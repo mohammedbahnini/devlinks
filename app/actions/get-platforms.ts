@@ -17,13 +17,15 @@ export const GetAllPlatforms = async () => {
 }
 
 
-export const GetUserPlatforms = async () => {
+export const GetUserPlatforms = async (userId: string ) => {
 
-    const userPlatforms = await prisma.platform.findMany({
-        orderBy: {
-            id: 'asc'
-        },
-        take: 5
+    const userPlatforms = await prisma.user.findMany({
+        include : {
+            Platforms : true
+        } ,
+        where : {
+            id : userId
+        }
     });
 
     return userPlatforms;
