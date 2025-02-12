@@ -9,9 +9,9 @@ type StoreType = {
     mockupPlatforms: BasePlatformType[],
     currentTab: string;
     mode: 'editor' | 'preview',
-    avatarPath: string;
-    firstName: string;
-    lastName: string;
+    avatarPath: string | null ;
+    firstName: string | null ;
+    lastName: string | null;
     email: string;
     getUserData: () => Promise<void>;
     changeTab: (value: string) => void;
@@ -141,9 +141,9 @@ export const Store = create<StoreType>()(
 type InitMainStoreType = {
     platformsValues?: string[],
     mockupPlatforms?: BasePlatformType[],
-    avatarPath?: string,
-    firstName: string,
-    lastName: string,
+    avatarPath?: string | null,
+    firstName: string | null ,
+    lastName: string | null ,
     email: string,
 }
 export const CreateMainStore = (InitData: InitMainStoreType) => {
@@ -174,7 +174,7 @@ export const CreateMainStore = (InitData: InitMainStoreType) => {
                 set(() => ({ mockupPlatforms: [BasePlatforms[0], BasePlatforms[1], BasePlatforms[2]] }))
             },
             changeTab: (value) => {
-                set((state) => ({ currentTab: value }))
+                set(() => ({ currentTab: value }))
             },
             addEmptyPlatformValue: () => {
                 set((state) => {
@@ -262,22 +262,4 @@ export type MainStore = ReturnType<typeof CreateMainStore>;
 
 
 
-
-type FakeStoreType = {
-    init: any,
-    foo: string
-}
-
-export function createFakeStore(initProps: any) {
-
-    return createStore<FakeStoreType>()
-        (
-            (set) => ({
-                init: initProps,
-                foo: 'bar'
-            })
-        )
-}
-
-export type FakeStore = ReturnType<typeof createFakeStore>
 

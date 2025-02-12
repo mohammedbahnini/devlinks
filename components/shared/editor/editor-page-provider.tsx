@@ -7,12 +7,12 @@ import { BasePlatformType, PlatformSelectType } from '@/lib/schemas'
 
 type EditorPageProviderProps = {
     userData: {
-        platformsValues?: string[],
-        mockupPlatforms?: BasePlatformType[],
-        avatarPath?: string,
-        firstName: string,
-        lastName: string,
-        email: string,
+        platformsValues?: string[] ,
+        mockupPlatforms?: BasePlatformType[] ,
+        avatarPath?: string | null ,
+        firstName: string | null,
+        lastName: string | null,
+        email: string ,
     },
     PlatformsSelectInitial: PlatformSelectType[]
 

@@ -41,6 +41,7 @@ export type BasePlatformType = {
     arrowColor: string;
     withBorder: boolean;
     icon: string;
+    link? : string;
 }
 
 

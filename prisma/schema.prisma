@@ -5,80 +5,93 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "mysql"
-    url      = env("DATABASE_URL")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-    id            String     @id @default(uuid())
-    firstName     String?
-    lastName      String?
-    email         String
-    emailVerified Boolean    @default(false)
-    image         String?
-    createdAt     DateTime   @default(now())
-    updatedAt     DateTime   @updatedAt
-    Session       Session[]
-    Account       Account[]
-    Platforms     Platform[]
+  id            String          @id @default(uuid())
+  firstName     String?
+  lastName      String?
+  email         String
+  emailVerified Boolean         @default(false)
+  image         String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  Session       Session[]
+  Account       Account[]
+  platforms     UserPlatforms[]
 
-    @@map("user")
+  @@map("user")
 }
 
 model Session {
-    id        String   @id @default(uuid())
-    userId    String
-    user      User     @relation(fields: [userId], references: [id])
-    token     String
-    expiresAt DateTime
-    ipAddress String?
-    userAgent String?
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  token     String
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    @@map("session")
+  @@map("session")
 }
 
 model Account {
-    id                    String    @id @default(uuid())
-    userId                String
-    user                  User      @relation(fields: [userId], references: [id])
-    accountId             String
-    providerId            String
-    accessToken           String?
-    refreshToken          String?
-    accessTokenExpiresAt  DateTime?
-    refreshTokenExpiresAt DateTime?
-    scope                 String?
-    idToken               String?
-    password              String?
-    createdAt             DateTime  @default(now())
-    updatedAt             DateTime  @updatedAt
+  id                    String    @id @default(uuid())
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id])
+  accountId             String
+  providerId            String
+  accessToken           String?
+  refreshToken          String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  idToken               String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
 
-    @@map("account")
+  @@map("account")
 }
 
 model Verification {
-    id         String   @id @default(uuid())
-    identifier String
-    value      String
-    expiresAt  DateTime
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
+  id         String   @id @default(uuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model Platform {
-    id         String  @id @default(uuid())
-    tag        String
-    name       String
-    bgColor    String
-    textColor  String
-    arrowColor String
-    withBorder Boolean
-    icon       String
-    users      User[]
+  id         String          @id @default(uuid())
+  tag        String
+  name       String
+  bgColor    String
+  textColor  String
+  arrowColor String
+  withBorder Boolean
+  icon       String
+  users      UserPlatforms[]
+
+  @@map("platform")
+}
+
+model UserPlatforms {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  platformId String
+  platform   Platform @relation(fields: [platformId], references: [id])
+  link       String
+
+  @@map("user_x_platform")
 }
